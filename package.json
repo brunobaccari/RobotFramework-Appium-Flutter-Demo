@@ -1,0 +1,22 @@
+{
+  "name": "Robotframework-ReflectlyApp",
+  "version": "1.0.0",
+  "description": "This repository hosts the ReflectlyApp automation testing framework as a demo project, utilizing Robot Framework and Appium for comprehensive end-to-end testing of mobile applications. The framework aims to ensure the functionality, performance, and reliability of the Reflectly mobile app",
+  "main": "index.js",
+  "scripts": {
+    "appium": "adb kill-server && adb start-server && adb tcpip 5555 && appium --base-path /wd/hub",
+    "appiumdriver": "npm i -g appium@next && npm i appium@next && appium driver install uiautomator2@2.29.4",
+    "test": "robot -d ./results src/Appium/Clients/Home.robot"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "appium": "^2.0.1",
+    "nvm": "^0.0.4",
+    "uiautomator2": "^1.0.2"
+  },
+  "devDependencies": {
+    "appium-uiautomator2-driver": "^2.29.4"
+  }
+}
