@@ -1,0 +1,16 @@
+results/
+logs/
+__pycache__
+node_modules/
+.env
+project-venv
+videos/
+mobile/
+api/
+web/
+package-lock.json
+.vscode
+log.html
+report.html
+output.xml
+.venv
