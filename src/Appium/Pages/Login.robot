@@ -20,13 +20,18 @@ insert the login
 insert the password
     Wait Until Element Is Visible    ${PASSWORD_FIELD}    30s
     Click Element    ${PASSWORD_FIELD}
-    ${USER_PASSWORD}    Get Env Variable    USER_PASSWORD
-    Input Text    ${PASSWORD_FIELD}    ${USER_PASSWORD}
+    ${previous_level}    Set Log Level    NONE
+    TRY
+        ${USER_PASSWORD}    Get Env Variable    USER_PASSWORD
+        Input Text    ${PASSWORD_FIELD}    ${USER_PASSWORD}
+    FINALLY
+        Set Log Level    ${previous_level}
+    END
 
 click SIGN IN
     Wait Until Element Is Visible    ${PASSWORD_FIELD}    30s
     Hide Keyboard    Done
-    Sleep    3s
+    Wait Until Element Is Visible    ${SIGN_IN}    30s
     Click Element    ${SIGN_IN}
 
 it should be logged in

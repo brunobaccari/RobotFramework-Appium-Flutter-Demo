@@ -9,4 +9,4 @@ Test Teardown       Close Application
 
 *** Test Cases ***
 CT: Login Sucessful
-    Run Keyword And Continue On Failure    CT: Login Sucessful
+    Run Keyword    CT: Login Sucessful
