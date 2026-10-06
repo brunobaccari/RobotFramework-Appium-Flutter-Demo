@@ -1,116 +1,49 @@
-# Reflectly App Automation with Robot Framework and Appium
+# Robot Framework · Appium · Flutter
 
-This project is designed for running automated end-to-end acceptance tests on the front-end of the Reflectly app using Robot Framework and Appium technologies. The tests can be executed both locally and within a CI/CD pipeline.
+[English version](README.en.md)
 
-## Robot and Appium Template
-> A repository of tests dedicated to utilizing various Robot Framework libraries with Appium.
+Exemplo de automação do login no aplicativo Reflectly para Android. O fluxo usa Robot Framework, AppiumLibrary e keywords organizadas em páginas, cenários e helpers.
 
-## Environment Setup
+## Preparar o ambiente
 
-### Install Python 3.12
+- Python com as dependências de `requirements.txt`.
+- Node.js, Appium 2 e driver UiAutomator2 compatível; o projeto registra o driver 2.29.4.
+- Android SDK, dispositivo ou emulador acessível pelo ADB.
+- Aplicativo Reflectly já instalado e conta autorizada para testes.
 
-Make sure you have Python 3.12 installed on your system. You can download it from the [official Python website](https://www.python.org/).
+```sh
+python -m venv .venv
+```
 
-### Clear pip cache
+Ative com `.venv\Scripts\Activate.ps1` no PowerShell ou `source .venv/bin/activate` no Linux/macOS.
 
-pip cache remove *
+```sh
+python -m pip install -r requirements.txt
+npm install
+cp .env.example .env
+npx appium driver list --installed
+```
 
+Se o UiAutomator2 ainda não estiver registrado nessa instalação de Appium 2, use `npx appium driver install uiautomator2@2.29.4`. No PowerShell, copie o exemplo com `Copy-Item .env.example .env`.
 
-### Deactivate Virtual Environment
+Preencha `.env` com `USER_EMAIL`, `USER_PASSWORD` e os campos `ANDROID_*` do exemplo, incluindo a versão do Android, o dispositivo, pacote e activity. O helper lê `ANDROID_APP`, mas não passa a capability `app` para instalar um APK: o aplicativo precisa estar instalado antes do teste.
 
-deactivate
+## Executar
 
+Inicie o servidor em um terminal:
 
-### Install Python Dependencies
-First, activate the virtual environment to avoid version conflicts with other installed libraries.
+```sh
+npx appium --base-path /wd/hub
+```
 
-pip install -r requirements.txt
+Em outro terminal com o ambiente Python ativo:
 
+```sh
+robot -d results src/Appium/Clients/Home.robot
+```
 
-### Install nvm:
-This is necessary to switch the Node version used in the project.
+O cliente aponta para `http://127.0.0.1:4723/wd/hub`. Os relatórios ficam em `results`; `npm test` executa o mesmo cenário.
 
-https://github.com/nvm-sh/nvm/blob/master/README.md
+## Escopo
 
-
-### Install Node.js:
-When installing, various additional packages may be installed, such as Chocolatey, etc.
-
-https://nodejs.org/en/download
-
-
-### Set the default Node version to the one used in the project:
-
-nvm use
-
-
-### Install Appium and Requirements
-
-npm run appiumdriver
-
-
-### Inspect App Elements
-Download the Appium Inspector; version 2023.12.2 was used in this project.
-
-https://github.com/appium/appium-inspector/releases
-
-
-### Configure Appium Inspector
-The settings for inspecting on Android should look similar to these:
-
-![Appium Inspector Config](./documentation/inspector.png)
-
-### Code Linting
-
-robotidy src
-
-
----
-
-### ---- Project Highlights ----
-
-- Page Object Model
-- Robot Framework Integration
-- Appium for Mobile Testing
-- Data Management
-- Report Generation
-
----
-
-### ---- Mobile Testing Prerequisites (APP) ----
-- Installation and Setup Guide: [YouTube Video](https://www.youtube.com/watch?v=W5hcHbzTjOc)
-- Required: Java JDK 8, Android Studio, Java SDK, System Environment Variables, webdriver.io (dependency).
-- Important: Update the environment variable from `%ANDROID_HOME%/build-tools` to `%ANDROID_HOME%\platform-tools`.
-- Start the device using the AVD Manager in Android Studio or connect a mobile phone via USB and enable USB debugging.
-- Commands to establish a connection with Appium: `appium`, `adb kill-server`, `adb start-server`, `adb devices`.
-- Additional helpful videos: [Video 1](https://www.youtube.com/watch?v=QYT0_qgkiCw) / [Video 2](https://www.youtube.com/watch?v=0a5NAJjUBbA)
-
-### ---- Commands to Run Tests on the APP: ----
-
-*Note: To run the tests with Appium, you must first <u>initialize the device via the AVD Manager</u> in Android Studio.*
-
-**Start Appium**
-
-npm run appium
-
-
-**Check Available Devices in ADB**
-
-adb devices
-
-
-**List Installed Emulators**
-
-emulator -list-avds
-
-
-**Execute Regression Tests**
-
-npm run test
-
-
-### EXTRAS
-- [Appium Workshop](https://eliasnogueira.github.io/appium-workshop/)
-- [Robot Framework Appium Library Documentation](https://serhatbolsu.github.io/robotframework-appiumlibrary/AppiumLibrary.html#Open%20Application)
-
----
+Há um cenário de login Android. O projeto não fornece APK, conta de teste ou evidência de execução iOS. As dependências históricas foram preservadas; o fluxo não foi reexecutado nesta revisão documental.
