@@ -3,19 +3,20 @@ Documentation       Start app
 
 Library             ../Helpers/env_loader.py
 Library             AppiumLibrary
+Library             OperatingSystem
 Resource            ../Resources/Variables.robot
 
 
 *** Keywords ***
 you open the APP
     ${ANDROID_AUTOMATION_NAME} =    Get Env Variable    ANDROID_AUTOMATION_NAME
-    ${ANDROID_APP} =    Get Env Variable    ANDROID_APP
     ${ANDROID_PLATFORM_NAME} =    Get Env Variable    ANDROID_PLATFORM_NAME
     ${ANDROID_DEVICENAME} =    Get Env Variable    ANDROID_DEVICENAME
     ${ANDROID_ACTIVITY} =    Get Env Variable    ANDROID_ACTIVITY
     ${ANDROID_APPPACKAGE} =    Get Env Variable    ANDROID_APPPACKAGE
     ${ANDROID_PLATFORM_VERSION} =    Get Env Variable    ANDROID_PLATFORM_VERSION
-    Open Application    http://127.0.0.1:4723/wd/hub
+    ${APPIUM_URL}    Get Environment Variable    APPIUM_URL    http://127.0.0.1:4723/wd/hub
+    Open Application    ${APPIUM_URL}
     ...    automationName=${ANDROID_AUTOMATION_NAME}
     ...    platformName=${ANDROID_PLATFORM_NAME}
     ...    platformVersion=${ANDROID_PLATFORM_VERSION}
@@ -25,11 +26,9 @@ you open the APP
 
 click on
     [Arguments]    ${text}    ${time}
-    Sleep    2s
 
     Wait Until Page Contains    ${text}    ${time}
     Click Text    ${text}
-    Sleep    2s
 
 fill in input
     [Arguments]    ${input_locator}    ${text_to_input}
@@ -45,4 +44,3 @@ click on the element that contains
     [Arguments]    ${text}    ${time}
     Wait Until Page Contains    ${text}    ${time}
     Click Element    //android.view.ViewGroup[contains(@content-desc, "${text}")]
-    Sleep    5s

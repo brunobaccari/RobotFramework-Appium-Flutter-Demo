@@ -1,13 +1,12 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
+load_dotenv(Path(__file__).resolve().parents[3] / '.env')
 
-    
 
 def get_env_variable(key):
-    """Retorna o valor da variável de ambiente correspondente à chave fornecida."""
-    load_dotenv(".env")
     value = os.getenv(key)
-    if value is None:
-        raise ValueError(f"Environment variable '{key}' does not exist.")
+    if value is None or not value.strip():
+        raise ValueError(f"Required environment variable '{key}' is missing or empty.")
     return value
