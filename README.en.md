@@ -26,7 +26,7 @@ npx appium driver list --installed
 
 If UiAutomator2 is not registered in that Appium 2 installation, run `npx appium driver install uiautomator2@2.29.4`. In PowerShell, copy the example with `Copy-Item .env.example .env`.
 
-Set `USER_EMAIL`, `USER_PASSWORD` and the example's `ANDROID_*` fields in `.env`, including Android version, device, package and activity. The helper reads `ANDROID_APP` but does not pass an `app` capability to install an APK: the app must already be installed.
+Set `USER_EMAIL`, `USER_PASSWORD` and the example's `ANDROID_*` fields in `.env`, including Android version, device, package and activity. The app must already be installed. Empty required values fail before opening a session. `APPIUM_URL` selects the server; its default remains local.
 
 ## Run
 
@@ -46,4 +46,6 @@ The client connects to `http://127.0.0.1:4723/wd/hub`. Reports are written to `r
 
 ## Scope
 
-The repository defines one Android login scenario. It does not provide an APK, a test account or evidence of iOS execution. Historical dependencies are preserved; the flow was not rerun during this documentation review.
+The repository defines one Android login scenario. It does not provide an APK, a test account or evidence of iOS execution. Direct Appium stack versions are preserved; unused packages were removed. npm scripts do not restart ADB or enable device TCP access.
+
+CI checks configuration loading and performs a Robot keyword **dry run**. It publishes a summary, JUnit and HTML as artifacts; this is not an Android run. Without an APK, account and device, actual login remains unverified. Run `python -m unittest test_env_loader` to check configuration without a device.
