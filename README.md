@@ -49,3 +49,5 @@ O cliente aponta para `http://127.0.0.1:4723/wd/hub`. Os relatórios ficam em `r
 Há um cenário de login Android. O projeto não fornece APK, conta de teste ou evidência de execução iOS. Mantivemos as versões diretas da stack Appium e removemos pacotes não utilizados. Os scripts npm não reiniciam ADB nem habilitam acesso TCP no dispositivo.
 
 O CI valida o carregador de configuração e faz **dry run** das keywords Robot. Publica summary, JUnit e HTML em artifacts; não é uma execução Android. Sem APK/conta/dispositivo fornecidos, o login real permanece não validado. Execute `python -m unittest test_env_loader` para conferir a configuração sem dispositivo.
+
+O summary do Actions lista cada cenário, duração, totais e motivo de bloqueio. O gate exige a quantidade prevista no workflow, sem falhas ou skips; JUnit ausente ou inválido reprova. O resumo também acompanha o artifact.

@@ -49,3 +49,5 @@ The client connects to `http://127.0.0.1:4723/wd/hub`. Reports are written to `r
 The repository defines one Android login scenario. It does not provide an APK, a test account or evidence of iOS execution. Direct Appium stack versions are preserved; unused packages were removed. npm scripts do not restart ADB or enable device TCP access.
 
 CI checks configuration loading and performs a Robot keyword **dry run**. It publishes a summary, JUnit and HTML as artifacts; this is not an Android run. Without an APK, account and device, actual login remains unverified. Run `python -m unittest test_env_loader` to check configuration without a device.
+
+The Actions summary lists every scenario, duration, totals and blocking reason. The gate requires the count configured in the workflow, with no failures or skips; missing or invalid JUnit fails the gate. The summary is also included in the artifact.
