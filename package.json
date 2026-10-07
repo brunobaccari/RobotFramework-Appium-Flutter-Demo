@@ -6,12 +6,17 @@
   "scripts": {
     "appium": "appium --base-path /wd/hub",
     "appiumdriver": "appium driver install uiautomator2@2.29.4",
-    "test": "robot -d ./results src/Appium/Clients/Home.robot"
+    "test": "robot -d ./results src/Appium/Clients/Home.robot",
+    "prepare": "husky",
+    "check:local": "git diff --cached --check && python scripts/summary.py --self-test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "appium": "2.0.1"
+  },
+  "devDependencies": {
+    "husky": "9.1.7"
   }
 }

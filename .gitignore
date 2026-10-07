@@ -31,3 +31,4 @@ htmlcov/
 /selenium-screenshot-*.png
 node_modules/
 /videos/
+.husky/_/

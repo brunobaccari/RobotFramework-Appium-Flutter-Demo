@@ -51,3 +51,5 @@ The repository defines one Android login scenario. It does not provide an APK, a
 CI checks configuration loading and performs a Robot keyword **dry run**. It publishes a summary, JUnit and HTML as artifacts; this is not an Android run. Without an APK, account and device, actual login remains unverified. Run `python -m unittest test_env_loader` to check configuration without a device.
 
 The Actions summary lists every scenario, duration, totals and blocking reason. The gate requires the count configured in the workflow, with no failures or skips; missing or invalid JUnit fails the gate. The summary is also included in the artifact.
+
+Husky: with Node 24 and the stack dependencies installed, run `npm ci` to enable pre-commit. `npm run check:local` checks the diff, report gate and existing type/lint checks. The hook also rejects ignored files in the index. Browser, emulator and API tests remain in CI.
